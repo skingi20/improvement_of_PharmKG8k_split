@@ -10,6 +10,7 @@ These issues consists of:
 2. head, relation, tail combinations existing in both e.g. train and test.
 3. head, tail combinations existing in both e.g. train and test.
 4. tail, head combinations in e.g. train existing as head, tail in e.g. test.
+
 Proof of these issues can be found in [proof_of_bad_split](https://github.com/skingi20/improvement_of_PharmKG8k_split/tree/main/proof_of_bad_split), and the code to generate these files can be found in *investigation_of_duplicates_in_pharmkg8k.py*
 
 ## The better split
