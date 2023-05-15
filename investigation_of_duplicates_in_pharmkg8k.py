@@ -7,23 +7,26 @@ train = pd.read_table(base_url+'train.tsv', names=["head", "relation", "tail"])
 test = pd.read_table(base_url+'test.tsv', names=["head", "relation", "tail"])
 valid = pd.read_table(base_url+'valid.tsv', names=["head", "relation", "tail"])
 
-train['dup'] = train.duplicated(keep = True)
+train['dup'] = train.duplicated(keep = False)
 train_dup = train[train['dup'] == True]
 train_dup.sort_values(by=['head', 'relation','tail'], inplace = True)
 
-test['dup'] = test.duplicated(keep = True)
+test['dup'] = test.duplicated(keep = False)
 test_dup = test[test['dup'] == True]
 test_dup.sort_values(by=['head', 'relation','tail'], inplace = True)
 
-valid['dup'] = valid.duplicated(keep = True)
+valid['dup'] = valid.duplicated(keep = False)
 valid_dup = valid[valid['dup'] == True]
 valid_dup.sort_values(by=['head', 'relation','tail'], inplace = True)
 
-train_test_intersect = train.merge(test,how='inner', on=['head','tail'])
+print(f'Train duplicates: {len(train_dup)}\nTest duplicates: {len(test_dup)}\nValid duplicates: {len(valid_dup)}')
 
-train_valid_intersect = train.merge(valid,how='inner', on=['head','tail'])
 
-test_valid_intersect = test.merge(valid,how='inner', on=['head','tail'])
+# train_test_intersect = train.merge(test,how='inner', on=['head','tail'])
+
+# train_valid_intersect = train.merge(valid,how='inner', on=['head','tail'])
+
+# test_valid_intersect = test.merge(valid,how='inner', on=['head','tail'])
 
 
 # train_no_dup = train.drop_duplicates()
@@ -45,9 +48,9 @@ test_valid_intersect = test.merge(valid,how='inner', on=['head','tail'])
 
 #train['dup'] = train.duplicated()
 
-new_train = train[train['head']=='ace']
+# new_train = train[train['head']=='ace']
 
-intersect = train.merge(test,how='inner', on=['head','tail'])
+# intersect = train.merge(test,how='inner', on=['head','tail'])
 
 
 # train_dup = train[train['dup'] == True]

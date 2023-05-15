@@ -34,20 +34,19 @@ def get_split_for_dataframe(dataframe, split_size):
     i = - 1
     for ind in dataframe.index:
         i = i+1
-        if i%50 == 0:
+        if i%1000 == 0:
             print(f'{i} out of {split_size} done')
-        head_tail = (dataframe.iat[ind,0],dataframe.iat[ind,2])
-        head_relation_tail = (dataframe.iat[ind,0],dataframe.iat[ind,1],dataframe.iat[ind,2])
-        tail_head = (dataframe.iat[ind,2],dataframe.iat[ind,0])
+        head_tail = (dataframe.iat[ind, 0], dataframe.iat[ind, 2])
+        tail_head = (dataframe.iat[ind, 2], dataframe.iat[ind, 0])
         if head_tail in moved_pairs or tail_head in moved_pairs:
             continue
+        head_relation_tail = (dataframe.iat[ind, 0], dataframe.iat[ind, 1], dataframe.iat[ind, 2])
         split_dataframe.add(head_relation_tail)
         moved_pairs.add(head_tail)
         moved_pairs.add(tail_head)
-        indexes = [index for index, value in enumerate(pharm_kg_list) if value == head_tail]
-        for index in indexes:
-            split_dataframe.add((dataframe.iat[index,0],dataframe.iat[index,1],dataframe.iat[index,2]))
-        indexes = [index for index, value in enumerate(pharm_kg_list) if value == tail_head]
+        start_index = i + 1  # Start checking from the next index
+        indexes = [index for index, value in enumerate(pharm_kg_list[start_index:], start=start_index) if
+                   value == head_tail or value == tail_head]
         for index in indexes:
             split_dataframe.add((dataframe.iat[index,0],dataframe.iat[index,1],dataframe.iat[index,2]))
         if len(split_dataframe) >= split_size:
