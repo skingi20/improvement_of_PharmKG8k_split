@@ -45,8 +45,7 @@ def get_split_for_dataframe(dataframe, split_size):
         moved_pairs.add(head_tail)
         moved_pairs.add(tail_head)
         start_index = i + 1  # Start checking from the next index
-        indexes = [index for index, value in enumerate(pharm_kg_list[start_index:], start=start_index) if
-                   value == head_tail or value == tail_head]
+        indexes = [index for index, value in enumerate(pharm_kg_list[start_index:], start=start_index) if value == head_tail or value == tail_head]
         for index in indexes:
             split_dataframe.add((dataframe.iat[index,0],dataframe.iat[index,1],dataframe.iat[index,2]))
         if len(split_dataframe) >= split_size:
@@ -63,8 +62,8 @@ new_test = get_split_for_dataframe(dataset_no_train, test_size)
 
 new_valid = dataset_no_train.append(new_test).drop_duplicates(keep=False)
 
-new_train.to_csv('improved_split/new_train.tsv', sep="\t", index = False)
+new_train.to_csv('test16may_split/new_train.tsv', sep="\t", index = False)
 
-new_test.to_csv('improved_split/new_test.tsv', sep="\t", index = False)
+new_test.to_csv('test16may_split/new_test.tsv', sep="\t", index = False)
 
-new_valid.to_csv('improved_split/new_valid.tsv', sep="\t", index = False)
+new_valid.to_csv('test16may_split/new_valid.tsv', sep="\t", index = False)
