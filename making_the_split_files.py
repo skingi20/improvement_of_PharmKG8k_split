@@ -38,10 +38,10 @@ def get_split_for_dataframe(dataframe, split_size):
             print(f'{i} out of {split_size} done')
         head_tail = (dataframe.iat[ind, 0], dataframe.iat[ind, 2])
         tail_head = (dataframe.iat[ind, 2], dataframe.iat[ind, 0])
-        if head_tail in moved_pairs or tail_head in moved_pairs:
-            continue
         head_relation_tail = (dataframe.iat[ind, 0], dataframe.iat[ind, 1], dataframe.iat[ind, 2])
         split_dataframe.add(head_relation_tail)
+        if head_tail in moved_pairs or tail_head in moved_pairs:
+            continue
         moved_pairs.add(head_tail)
         moved_pairs.add(tail_head)
         start_index = i + 1  # Start checking from the next index
@@ -62,8 +62,8 @@ new_test = get_split_for_dataframe(dataset_no_train, test_size)
 
 new_valid = dataset_no_train.append(new_test).drop_duplicates(keep=False)
 
-new_train.to_csv('test16may_split/new_train.tsv', sep="\t", index = False)
+new_train.to_csv('test16may1230/new_train.tsv', sep="\t", index = False)
 
-new_test.to_csv('test16may_split/new_test.tsv', sep="\t", index = False)
+new_test.to_csv('test16may1230/new_test.tsv', sep="\t", index = False)
 
-new_valid.to_csv('test16may_split/new_valid.tsv', sep="\t", index = False)
+new_valid.to_csv('test16may1230/new_valid.tsv', sep="\t", index = False)
