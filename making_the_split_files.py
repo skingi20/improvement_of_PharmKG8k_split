@@ -25,23 +25,14 @@ new_train = get_split_for_dataframe(dataset, train_size)
 #Making the test set
 dataset_no_train = dataset.append(new_train).drop_duplicates(keep=False).reset_index(drop=True)
 
-new_test = get_split_for_dataframe(dataset_no_train, test_size)
+new_test = get_split_for_dataframe(dataset_no_train, test_size).reset_index(drop=True)
 
 #Making the valid set
-new_valid = dataset_no_train.append(new_test).drop_duplicates(keep=False)
+new_valid = dataset_no_train.append(new_test).drop_duplicates(keep=False).reset_index(drop=True)
 
 #Since this code doesn't check if the split is transductive, this code moves edges to make it transductive
-#Gets the entities which are in test and valid but not in train
-train_test_diff = get_diff_between_entity_lists(new_test, new_train)
-train_valid_diff = get_diff_between_entity_lists(new_valid, new_train)
+new_train, new_test, new_valid = make_transductive(new_train, new_test, new_valid)
 
-#Finds the indexes of the edges in test and valid which has the entities that are not in train
-test_to_train_indexes = find_rows_to_move(new_test, new_train, train_test_diff)
-valid_to_train_indexes = find_rows_to_move(new_valid, new_train, train_valid_diff)
-
-#Moves rows from test to train and from valid to train
-new_test, new_train = move_rows(new_test, new_train, test_to_train_indexes)
-new_valid, new_train = move_rows(new_valid, new_train, valid_to_train_indexes)
 
 #Verifying the results
 check_entity_overlap(new_train, new_test, new_valid)

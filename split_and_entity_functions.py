@@ -86,6 +86,81 @@ def move_rows(from_df, to_df, index_to_move):
 
     return from_df, to_df
 
+def can_be_moved_pharm(train_P):
+    import pandas as pd
+    #getting train without relation
+    train_P_without_relation = train_P[["head", "tail"]]
+    #swapping around the head and tial of train without relation
+    train_tail_head_without_relation = train_P_without_relation.rename(columns = {"head":"tail", "tail":"head"})
+    train_tail_head_without_relation = train_tail_head_without_relation[["head", "tail"]]
+    #deleting all that train and train head tial swaped have in commen, so that what is left only is the entity combinationes that have one occurrences 
+    inner_train_P_x_train_tail_head = pd.concat([train_tail_head_without_relation, train_P_without_relation], join="outer").drop_duplicates(keep = False)
+    #finding the intercestion between all the edges that are unique combination and the original train. 
+    #what is left is all unique edge, that can be moved without causing overlaps between train, test and valid, since they are unique. 
+    can_be_moved = pd.merge(inner_train_P_x_train_tail_head, train_P, on=("head","tail"), how = "inner")
+    can_be_moved = can_be_moved[["head","relation","tail"]]
+    return can_be_moved
+
+def count_values(lst):
+    from collections import Counter
+    count_dict = Counter(lst)
+    count_dict = dict(count_dict)
+    return count_dict
+
+def finding_can_be_moved(train, number_to_be_moved, can_be_moved_edges_train):
+    import pandas as pd
+    print(f'Moving {number_to_be_moved} edges out of {len(can_be_moved_edges_train)} possible edges')
+    train_entites = list(train['head'].append(train['tail']))
+    entity_Count = count_values(train_entites)
+    
+    entity_count_df = pd.DataFrame(entity_Count.items(), columns=['entity', 'count'])
+    
+    entity_count_df = entity_count_df.sort_values(by = 'count', ascending = False).reset_index(drop = True)
+    
+    entity_count_df = entity_count_df[entity_count_df['count'] > 1]
+    
+    can_be_moved = pd.DataFrame(columns = ['head','relation','tail'])
+    for index in can_be_moved_edges_train.index: 
+        if index% 100 == 0: 
+            print(f'Done with {index} out of {number_to_be_moved}')
+        if can_be_moved_edges_train.iat[index,0] in list(entity_count_df['entity']) and can_be_moved_edges_train.iat[index,2] in list(entity_count_df['entity']):
+            # Retrieve the row index where the first value and second value is found
+            row_index_1 = entity_count_df[entity_count_df['entity'] == can_be_moved_edges_train.iat[index, 0]].index[0]
+            row_index_2 = entity_count_df[entity_count_df['entity'] == can_be_moved_edges_train.iat[index, 2]].index[0]
+            # Decrement the count for the first entity and second entity
+            entity_count_df.at[row_index_1, 'count'] -= 1
+            entity_count_df.at[row_index_2, 'count'] -= 1
+            entity_count_df = entity_count_df[entity_count_df['count'] > 1]
+            can_be_moved = can_be_moved.append(can_be_moved_edges_train.iloc[index])
+            if len(can_be_moved) >= number_to_be_moved:
+                break
+    return can_be_moved
+
+def make_transductive(train,test,valid):
+    import pandas as pd
+    #Move from test to train
+    diff_entities = get_diff_between_entity_lists(test,train)
+    rows_to_move = find_rows_to_move(test,train,diff_entities)
+    almost_test, almost_train = move_rows(test, train, rows_to_move)
+    amount_to_move = len(rows_to_move)
+    #Find rows in train which can be moved back (Only return edges which can't cause data leakage)
+    can_be_moved = can_be_moved_pharm(train)
+    #Move from train to test
+    to_move = finding_can_be_moved(almost_train, amount_to_move, can_be_moved)
+    new_test = pd.concat([almost_test, to_move], join="outer").reset_index(drop = True)
+    new_train = pd.concat([almost_train, to_move], join="outer").drop_duplicates(keep=False).reset_index(drop = True)
+    #Move from valid to train
+    diff_entities = get_diff_between_entity_lists(valid,new_train)
+    rows_to_move = find_rows_to_move(valid,new_train,diff_entities)
+    almost_valid, almost_train = move_rows(valid, new_train, rows_to_move)
+    amount_to_move = len(rows_to_move)
+    #Move from train to valid
+    can_be_moved = pd.concat([can_be_moved, to_move], join = "outer").drop_duplicates(keep=False).reset_index(drop = True)
+    to_move = finding_can_be_moved(almost_train, amount_to_move, can_be_moved)
+    new_valid = pd.concat([almost_valid, to_move], join="outer").reset_index(drop = True)
+    new_train = pd.concat([almost_train, to_move], join="outer").drop_duplicates(keep=False).reset_index(drop = True)
+    return new_train,new_test,new_valid
+
 
 def check_entity_overlap(train,test,valid):
     train_head = set(train["head"])
