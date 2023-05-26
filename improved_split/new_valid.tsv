@@ -1524,7 +1524,6 @@ gria1	GG	grm2
 il1b	E	ang
 plg	Iw	analgesia
 teratoma	ML	pou5f1
-znf134	I	aarskog scott syndrome
 keratoconus	ML	prdm5
 otorhinolaryngologic neoplasms	ML	b2m
 slc7a1	O	l arginine
@@ -5905,7 +5904,6 @@ aldh3a1	GG	acadm
 hla dpb1	U	leukemia myeloid
 cimetidine	E	shbg
 rps6ka3	GG	ripk1
-radium ra 223 dichloride	I	breast neoplasms
 primidone	CC	azelastine
 riboflavin	Sa	neoplasms neuroepithelial
 dexamethasone	E	prkaa2
@@ -9242,7 +9240,6 @@ tank	Rg	plk1
 phenoxybenzamine	I	adra2c
 fabp4	P	kidney diseases
 pbk	GG	rps6ka5
-diloxanide	I	helminthiasis
 metoclopramide	Sa	brain diseases
 dyphylline	CC	nadolol
 hla drb1	GG	magea3
@@ -20520,7 +20517,6 @@ neoplasms	ML	bcr
 kras	Iw	adm
 mrps16	GG	rmnd1
 foxm1	E	bmp7
-tm4sf20	GG	cd74
 flupentixol	CC	selegiline
 msh3	P	lymphoma non hodgkin
 ifng	GG	map2k6
@@ -21125,7 +21121,6 @@ c2	B	sp1
 zeb2	B	il1a
 il1b	Q	cdk6
 acsbg1	GG	gapdhs
-brunner syndrome	ML	maoa
 il17a	P	transient erythroblastopenia of childhood
 valproic acid	CC	minoxidil
 aldh1a3	GG	ldha
@@ -22882,7 +22877,6 @@ egfr	P	muscle hypertonia
 cox6a1	GG	ca4
 tbxas1	P	carcinoma
 pnlip	GG	tcn2
-dimetacrine	I	ache
 rag2	Q	cd4
 malignant mesothelioma	ML	cd24
 thrb	I	salbutamol
@@ -24641,7 +24635,6 @@ tubb3	GG	tuba4a
 rosuvastatin	E	pcna
 prkg2	GG	tgfbr1
 adenine	E	ahcy
-guanadrel	I	slc6a2
 hao1	GG	shmt2
 thioridazine	CC	ethanol
 il11ra	GG	il15ra
@@ -25844,7 +25837,6 @@ haloperidol	T	renal insufficiency
 ctrc	GG	pnlip
 lidocaine	T	fatigue
 adra2a	GG	npy5r
-clomocycline	I	bacterial infections
 mapk10	P	depression
 wwp2	GG	smad1
 clomipramine	CC	darunavir
@@ -25949,7 +25941,6 @@ odc1	GG	ckmt1a
 tnfaip3	P	inflammation
 a2m	P	pancreatitis
 docetaxel	CC	posaconazole
-equilin	I	hsd17b1
 pkp2	GG	rars2
 cd79a	P	infarction
 cefazolin	I	tpmt
@@ -27381,7 +27372,6 @@ chrm4	GG	hcrtr1
 eng	P	arteriosclerosis
 mapk14	GG	hdac1
 everolimus	T	purpura thrombocytopenic idiopathic
-monobenzone	Sa	hypopigmentation
 cat	P	alzheimer disease
 nfe2l2	Rg	nr3c1
 lamc3	GG	lama3
@@ -27613,7 +27603,6 @@ mapk14	GG	scn8a
 methylphenidate	E	pomc
 nos2	GG	slc7a5
 hba1	GG	aqp1
-hexafluronium	I	bche
 mif	E	ptprc
 carbamazepine	CC	ticagrelor
 acsbg1	GG	ubc
@@ -29225,7 +29214,6 @@ amitriptyline	CC	molindone
 donepezil	T	fatigue
 goserelin	CC	artemether
 mat1a	GG	cbs
-znf134	I	methylphenidate
 ace2	O	cilazapril
 quazepam	I	gabra3
 prkcd	P	hyperglycemia
@@ -29773,7 +29761,6 @@ paclitaxel	E	il1b
 esr1	P	epilepsy
 prednisone	T	hyperbilirubinemia hereditary
 naltrexone	Sa	purpura thrombocytopenic idiopathic
-lss	Rg	msx2
 ropinirole	CC	desflurane
 respiratory hypersensitivity	ML	syk
 porphyrias hepatic	ML	hamp
@@ -30249,7 +30236,6 @@ nabilone	CC	epinephrine
 slc18a2	K	nitric oxide
 neoplasms	ML	tpm3
 acat1	P	arteriosclerosis
-radium ra 223 dichloride	Pr	drug toxicity
 oxybutynin	T	myotonic dystrophy
 dofetilide	CC	risperidone
 ranolazine	T	dwarfism
@@ -31067,7 +31053,6 @@ mirtazapine	Pr	sleep disorders intrinsic
 prkcq	Rg	prkcq
 cox4i1	GG	rpl5
 mapk6	GG	camk2b
-monobenzone	I	tyr
 shh	P	brain edema
 gale	GG	b4galt1
 mtnr1b	Ra	kcnq1
@@ -41794,7 +41779,6 @@ vitamin e	E	fxn
 boceprevir	CC	dabrafenib
 dyrk2	GG	nr1i2
 torasemide	CC	diclofenac
-chloroxine	I	erythema
 myeloproliferative disorders	ML	hint1
 van der woude syndrome	ML	btk
 prkca	Rg	retn
@@ -45111,7 +45095,6 @@ cstb	GG	rad21
 diltiazem	CC	dantrolene
 urologic neoplasms	ML	ifnar1
 imipenem	Sa	inflammation
-lethal congenital contracture syndrome 1	ML	pip5k1c
 tp53	P	atrophy
 mapkapk3	U	retinal diseases
 methotrimeprazine	CC	levomilnacipran
@@ -47988,3 +47971,20 @@ lrp5	U	spondylitis ankylosing
 nphp4	GG	cngb3
 nitrazepam	CC	rotigotine
 amphetamine	T	schizophrenia
+atic	I	cyclosporine
+mlh3	GG	ano2
+mertk	GG	cd2
+gsn	GG	mapk3
+methamphetamine	Pr	atrophy
+repaglinide	J	body weight changes
+oxprenolol	T	pain
+ep300	GG	ppp3ca
+foxo1	GG	txnrd1
+clozapine	CC	primidone
+htr3b	I	ethanol
+nematode infections	An	onchocerciasis
+iars	GG	mat1a
+rps14	U	anemia
+meclizine	T	communication disorders
+dyrk1a	GG	prkch
+diethylstilbestrol	Sa	infertility
